@@ -10,24 +10,24 @@ type Field = {
 };
 
 const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState<String>("");
+  const [password, setPassword] = useState<String>("");
+
   const formSettings = [
     {
       label: "E-mail",
-      value: "",
+      value: email,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
         setEmail(event.target.value),
     },
     {
       label: "Password",
       type: "password",
-      value: "",
+      value: password,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
         setPassword(event.target.value),
     },
   ];
-
-  const [email, setEmail] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
 
   return (
     <>
