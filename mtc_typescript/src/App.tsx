@@ -1,15 +1,19 @@
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import PublicRoute from "Router/PublicRoute";
-import PrivateRoute from "Router/PrivateRoute";
+import HomePage from "pages/HomePage";
+import NotFoundPage from "pages/NotFoundPage";
+import LoginPage from "pages/LoginPage";
+
 import "App.css";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Routes>
-      <PublicRoute />
-      <PrivateRoute />
+      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   );
-}
+};
+
 export default App;

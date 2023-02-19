@@ -1,10 +1,14 @@
-import { Route } from "react-router-dom";
-import LoginPage from "pages/LoginPage/LoginPage";
+import React from "react";
+import { Route, RouteProps } from "react-router-dom";
 
-const PrivateRoute: React.FC = () => {
+import LoginPage from "pages/LoginPage";
+
+const PrivateRoute: React.FC<RouteProps> = () => {
   return (
-    <Route path="/login" element={< LoginPage />} />
-  )
-}
+    <Route>
+      <Route path="/login" element={<LoginPage />} />
+    </Route>
+  );
+};
 
-export default PrivateRoute
+export default PrivateRoute;

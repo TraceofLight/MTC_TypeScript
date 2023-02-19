@@ -1,10 +1,14 @@
-import { Route } from "react-router-dom";
-import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
+import React from "react";
+import { Route, RouteProps } from "react-router-dom";
 
-const PublicRoute: React.FC = () => {
+import NotFoundPage from "pages/NotFoundPage";
+
+const PublicRoute: React.FC<RouteProps> = () => {
   return (
-    <Route path="*" element={<NotFoundPage />} />
-  )
-}
+    <Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  );
+};
 
-export default PublicRoute
+export default PublicRoute;
