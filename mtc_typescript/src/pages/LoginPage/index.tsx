@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { authenticationInstance } from "FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Logo from "components/common/Logo";
-import FormTextField from "components/LoginPage/FormField";
+import FormTextField from "components/common/FormField";
+import SubmitButton from "components/common/SubmitButton";
 
-type Field = {
+interface Field {
   label: String;
   value: String;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
+
+interface LoginProps {
+  email: string;
+  password: string;
+}
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
+
+  const loginHandler = async ({ email, password }: LoginProps) => {
+    try {
+      await signInWithEmailAndPassword(authenticationInstance, email, password);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const formSettings = [
     {
@@ -29,6 +49,12 @@ const LoginPage: React.FC = () => {
     },
   ];
 
+  const loginButtonSettings = [
+    {
+      onclick: loginHandler,
+    },
+  ];
+
   return (
     <>
       <Logo />
@@ -40,6 +66,7 @@ const LoginPage: React.FC = () => {
           onChange={onChange}
         />
       ))}
+      <SubmitButton />
     </>
   );
 };
