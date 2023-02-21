@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "@mui/material";
 
 interface SubmitButtonProps extends ButtonProps {
   onClick?: () => void;
-  contains?: React.ReactFragment;
+  contains?: React.ReactNode;
 }
 
 const SubmitButton = ({
