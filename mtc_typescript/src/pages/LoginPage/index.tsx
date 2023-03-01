@@ -1,3 +1,5 @@
+import { ButtonProps, TextFieldProps, Stack, Container } from "@mui/material";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authenticationInstance } from "FirebaseConfig";
@@ -6,8 +8,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-
-import { ButtonProps, TextFieldProps } from "@mui/material";
 
 import Logo from "components/common/Logo";
 import FormTextField from "components/common/FormField";
@@ -43,6 +43,7 @@ const LoginPage: React.FC = () => {
     try {
       const user = await signInWithPopup(authenticationInstance, provider);
       console.log(user);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -90,35 +91,44 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <Logo />
-      {formSettings.map(
-        ({ label, value, onChange }: TextFieldProps, index: number) => (
-          <div>
-            <FormTextField
-              key={index}
-              label={label}
-              value={value}
-              onChange={onChange}
-            />
-          </div>
-        )
-      )}
-      {loginButtonSettings.map(
-        (
-          { onClick, contains, variant, className }: SubmitButtonProps,
-          index: number
-        ) => (
-          <div>
-            <SubmitButton
-              key={index}
-              onClick={onClick}
-              contains={contains}
-              variant={variant}
-              className={className}
-            />
-          </div>
-        )
-      )}
+      <Container
+        sx={{
+          maxWidth: "sm",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <Stack spacing={2} direction="column">
+          <Logo />
+          {formSettings.map(
+            ({ label, value, onChange }: TextFieldProps, index: number) => (
+              <FormTextField
+                key={index}
+                label={label}
+                value={value}
+                onChange={onChange}
+                className="login-form-text-field"
+              />
+            )
+          )}
+          {loginButtonSettings.map(
+            (
+              { onClick, contains, variant, className }: SubmitButtonProps,
+              index: number
+            ) => (
+              <SubmitButton
+                key={index}
+                onClick={onClick}
+                contains={contains}
+                variant={variant}
+                className={className}
+              />
+            )
+          )}
+        </Stack>
+      </Container>
     </>
   );
 };

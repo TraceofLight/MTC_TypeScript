@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, User } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -13,12 +13,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const authenticationInstance = getAuth(app);
 
-let currentUser: User | null = null;
-
-const updateUser = (user: User | null) => {
-  currentUser = user;
-};
-
-authenticationInstance.onAuthStateChanged(updateUser);
-
-export { authenticationInstance, firebaseConfig, currentUser };
+export { authenticationInstance, firebaseConfig };

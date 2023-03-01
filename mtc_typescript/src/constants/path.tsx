@@ -1,8 +1,8 @@
-const HOST = "https://www.sangta.ch/api/v1";
+const HOST = process.env.REACT_APP_BASE_URL;
 
 const USER = "user/";
 
-const urls = {
+const path = {
   accounts: {
     login: () => HOST + USER + "login/",
     logout: () => HOST + USER + "logout/",
@@ -10,4 +10,4 @@ const urls = {
   },
 };
 
-export default urls;
+export default path;
