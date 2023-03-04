@@ -20,7 +20,7 @@ type Variant = "text" | "outlined" | "contained" | undefined;
 interface SubmitButtonProps extends ButtonProps {
   className?: string;
   variant?: Variant;
-  onClick?: () => Promise<void>;
+  onClick?: () => Promise<void> | void;
   contains?: React.ReactNode;
 }
 
@@ -89,18 +89,30 @@ const LoginPage: React.FC = () => {
     },
   ];
 
+  const registerAndFindButtonSettings = [
+    {
+      onClick: () => navigate("/register"),
+      contains: <>가입하기</>,
+      variant: "outlined" as Variant,
+    },
+    {
+      onClick: () => navigate("/password-recovery"),
+      contains: <>비밀번호 찾기</>,
+      variant: "outlined" as Variant,
+    }
+  ]
+
   return (
     <>
       <Container
         sx={{
-          maxWidth: "sm",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
         }}
       >
-        <Stack spacing={2} direction="column">
+        <Stack spacing={2} direction="column" className="login-stack">
           <Logo />
           {formSettings.map(
             ({ label, value, onChange }: TextFieldProps, index: number) => (
@@ -127,6 +139,22 @@ const LoginPage: React.FC = () => {
               />
             )
           )}
+          <Stack spacing={2} direction="row" justifyContent={"space-between"} className="config-buttons">
+            {registerAndFindButtonSettings.map(
+              (
+                { onClick, contains, variant, className }: SubmitButtonProps,
+                index: number
+              ) => (
+                <SubmitButton
+                  key={index}
+                  onClick={onClick}
+                  contains={contains}
+                  variant={variant}
+                  className={className}
+                />
+              )
+            )}
+          </Stack>
         </Stack>
       </Container>
     </>

@@ -2,7 +2,7 @@ import Box from "@mui/system/Box";
 
 const Logo: React.FC = () => {
   return (
-    <Box sx={{ marginX: "auto", marginY: "5vh" }}>
+    <Box sx={{ marginX: "auto", marginY: "3vh" }}>
       <img
         src={require("assets/images/logo.png")}
         width="200"

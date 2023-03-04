@@ -1,3 +1,7 @@
 .login-button {
   background-color: "#6DCEF5";
 }
+
+.config-buttons {
+  padding: 2vh 0;
+}
